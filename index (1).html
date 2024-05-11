@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6f71d8;
+        }
+
+        .weather-container {
+            text-align: center;
+            background-color: #c9b1cf;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .weather-container img {
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            animation: floatCloud 8s linear infinite;
+        }
+
+        .weather-container p {
+            margin-bottom: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+
+        @keyframes floatCloud {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2><b>Real-Time Weather App</b></h2>
+    <form method="POST" action="/">
+        <label for="city"><b>City Name: </b> </label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Submit</button>
+    </form>
+    {% if weather %}
+    <div class="weather-container">
+        <h3><b>Weather in {{ weather.city }}:</b></h3>
+        <img src="http://openweathermap.org/img/wn/{{ weather.icon }}.png" alt="Weather Icon">
+        <p>Temperature: {{ weather.temperature }}°C</p>
+        <p>Humidity: {{ weather.humidity }}%</p>
+        <p>Description: {{ weather.description }}</p>
+        <p>Pollution (PM2.5): {{ weather.pollution }} µg/m³</p>
+    </div>
+    {% endif %}
+    <br>
+    <a href="/emergency"><b>Emergency Services Contact Information</b></a>
+</body>
+</html>
